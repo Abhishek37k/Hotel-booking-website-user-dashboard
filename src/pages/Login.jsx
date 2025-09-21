@@ -4,7 +4,6 @@ import { useDispatch } from "react-redux";
 import { authActions } from "../redux/authSlice";
 
 const API_KEY = import.meta.env.VITE_FIREBASE_API_KEY;
-// console.log("API_KEY:", API_KEY);
 
 const Login = () => {
   const emailRef = useRef();
@@ -24,7 +23,6 @@ const Login = () => {
     };
 
     try {
-      // 1️⃣ Firebase Auth Login
       const res = await fetch(
         `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${API_KEY}`,
         {
@@ -38,7 +36,6 @@ const Login = () => {
 
       const userId = data.localId;
 
-      // 2️⃣ Fetch user role from Firebase Realtime Database
       const roleRes = await fetch(
         `${import.meta.env.VITE_FIREBASE_DB_URL}/users/${userId}.json?auth=${
           data.idToken
@@ -56,7 +53,6 @@ const Login = () => {
         return;
       }
 
-      // 3️⃣ Login successful
       dispatch(
         authActions.login({
           user: { email: payload.email, name: roleData.name },
@@ -70,37 +66,45 @@ const Login = () => {
 
     setLoading(false);
   };
+
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-purple-400 via-pink-400 to-red-400">
       <form
-        className="bg-white p-6 rounded shadow-md w-full max-w-md"
         onSubmit={handleLogin}
+        className="bg-white/95 backdrop-blur-md p-8 rounded-3xl shadow-2xl w-full max-w-md"
       >
-        <h2 className="text-xl font-bold mb-4">Login</h2>
+        <h2 className="text-3xl font-extrabold mb-6 text-center text-gray-800">
+          Welcome Back
+        </h2>
+        <p className="text-center text-gray-600 mb-6">
+          Login to access your dashboard
+        </p>
+
         <input
           ref={emailRef}
           type="email"
           placeholder="Email"
           required
-          className="w-full p-2 mb-3 border rounded"
+          className="w-full p-3 mb-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-400 focus:border-transparent transition"
         />
         <input
           ref={passRef}
           type="password"
           placeholder="Password"
           required
-          className="w-full p-2 mb-3 border rounded"
+          className="w-full p-3 mb-6 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-400 focus:border-transparent transition"
         />
         <button
           type="submit"
           disabled={loading}
-          className="w-full bg-blue-500 text-white p-2 rounded"
+          className="w-full bg-pink-500 hover:bg-pink-600 text-white font-semibold p-3 rounded-xl shadow-md transition duration-300"
         >
           {loading ? "Logging in..." : "Login"}
         </button>
-        <p className="mt-2 text-sm text-gray-600">
+
+        <p className="mt-4 text-center text-gray-600">
           Don't have an account?{" "}
-          <Link to="/signup" className="text-blue-500">
+          <Link to="/signup" className="text-pink-500 font-medium hover:underline">
             Signup
           </Link>
         </p>

@@ -17,6 +17,7 @@ const Signup = () => {
   const handleSignup = async (e) => {
     e.preventDefault();
     setLoading(true);
+
     const payload = {
       email: emailRef.current.value,
       password: passRef.current.value,
@@ -33,23 +34,20 @@ const Signup = () => {
         }
       );
       const data = await res.json();
-      console.log("Signup Response:", data);
       if (data.error) throw new Error(data.error.message);
 
-      // Store user info in Realtime Database
       const userId = data.localId;
       const token = data.idToken;
-      
+
       await fetch(`${DB_URL}/users/${userId}.json?auth=${token}`, {
         method: "PUT",
         body: JSON.stringify({
           name: nameRef.current.value,
           email: payload.email,
-          role: "user", // default role
+          role: "user",
         }),
       });
 
-      // store user in redux
       dispatch(
         authActions.login({
           user: { email: payload.email, name: nameRef.current.value },
@@ -60,47 +58,55 @@ const Signup = () => {
     } catch (err) {
       alert(err.message);
     }
+
     setLoading(false);
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-green-400 via-teal-400 to-blue-500">
       <form
-        className="bg-white p-6 rounded shadow-md w-full max-w-md"
         onSubmit={handleSignup}
+        className="bg-white/95 backdrop-blur-md p-8 rounded-3xl shadow-2xl w-full max-w-md"
       >
-        <h2 className="text-xl font-bold mb-4">Signup</h2>
+        <h2 className="text-3xl font-extrabold mb-6 text-center text-gray-800">
+          Create Account
+        </h2>
+        <p className="text-center text-gray-600 mb-6">
+          Join us to explore amazing hotels
+        </p>
+
         <input
           ref={nameRef}
           type="text"
           placeholder="Name"
           required
-          className="w-full p-2 mb-3 border rounded"
+          className="w-full p-3 mb-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-400 focus:border-transparent transition"
         />
         <input
           ref={emailRef}
           type="email"
           placeholder="Email"
           required
-          className="w-full p-2 mb-3 border rounded"
+          className="w-full p-3 mb-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-400 focus:border-transparent transition"
         />
         <input
           ref={passRef}
           type="password"
           placeholder="Password"
           required
-          className="w-full p-2 mb-3 border rounded"
+          className="w-full p-3 mb-6 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-400 focus:border-transparent transition"
         />
         <button
           type="submit"
           disabled={loading}
-          className="w-full bg-blue-500 text-white p-2 rounded"
+          className="w-full bg-teal-500 hover:bg-teal-600 text-white font-semibold p-3 rounded-xl shadow-md transition duration-300"
         >
           {loading ? "Signing up..." : "Signup"}
         </button>
-        <p className="mt-2 text-sm text-gray-600">
+
+        <p className="mt-4 text-center text-gray-600">
           Already have an account?{" "}
-          <Link to="/" className="text-blue-500">
+          <Link to="/" className="text-teal-500 font-medium hover:underline">
             Login
           </Link>
         </p>
