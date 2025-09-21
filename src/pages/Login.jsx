@@ -68,7 +68,12 @@ const Login = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-purple-400 via-pink-400 to-red-400">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-purple-400 via-pink-400 to-red-400 px-4">
+      {/* Page Heading */}
+      <h1 className="text-4xl font-extrabold text-white mb-8 text-center shadow-md">
+        Hotel Booking Website - User Login
+      </h1>
+
       <form
         onSubmit={handleLogin}
         className="bg-white/95 backdrop-blur-md p-8 rounded-3xl shadow-2xl w-full max-w-md"

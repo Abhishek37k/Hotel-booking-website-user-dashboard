@@ -63,50 +63,56 @@ const Signup = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-green-400 via-teal-400 to-blue-500">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-green-400 via-teal-500 to-blue-600 px-4">
+      {/* Page Heading */}
+      <h1 className="text-2xl md:text-3xl font-extrabold text-white mb-10 text-center drop-shadow-lg">
+        Hotel Booking Website - User Signup
+      </h1>
+
       <form
         onSubmit={handleSignup}
-        className="bg-white/95 backdrop-blur-md p-8 rounded-3xl shadow-2xl w-full max-w-md"
+        className="bg-white/90 backdrop-blur-md p-8 rounded-3xl shadow-xl w-full max-w-md border border-white/30"
       >
-        <h2 className="text-3xl font-extrabold mb-6 text-center text-gray-800">
-          Create Account
+        <h2 className="text-2xl font-bold mb-4 text-center text-gray-800">
+          Create Your Account
         </h2>
-        <p className="text-center text-gray-600 mb-6">
-          Join us to explore amazing hotels
+        <p className="text-center text-gray-500 mb-6 text-sm">
+          Sign up and start booking your favorite hotels
         </p>
 
         <input
           ref={nameRef}
           type="text"
-          placeholder="Name"
+          placeholder="Full Name"
           required
-          className="w-full p-3 mb-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-400 focus:border-transparent transition"
+          className="w-full p-3 mb-4 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition"
         />
         <input
           ref={emailRef}
           type="email"
-          placeholder="Email"
+          placeholder="Email Address"
           required
-          className="w-full p-3 mb-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-400 focus:border-transparent transition"
+          className="w-full p-3 mb-4 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition"
         />
         <input
           ref={passRef}
           type="password"
           placeholder="Password"
           required
-          className="w-full p-3 mb-6 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-400 focus:border-transparent transition"
+          className="w-full p-3 mb-6 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition"
         />
+
         <button
           type="submit"
           disabled={loading}
-          className="w-full bg-teal-500 hover:bg-teal-600 text-white font-semibold p-3 rounded-xl shadow-md transition duration-300"
+          className="w-full bg-gradient-to-r from-teal-500 to-blue-500 hover:from-teal-600 hover:to-blue-600 text-white font-semibold p-3 rounded-xl shadow-lg transition duration-300"
         >
           {loading ? "Signing up..." : "Signup"}
         </button>
 
-        <p className="mt-4 text-center text-gray-600">
+        <p className="mt-6 text-center text-gray-600 text-sm">
           Already have an account?{" "}
-          <Link to="/" className="text-teal-500 font-medium hover:underline">
+          <Link to="/" className="text-teal-600 font-medium hover:underline">
             Login
           </Link>
         </p>

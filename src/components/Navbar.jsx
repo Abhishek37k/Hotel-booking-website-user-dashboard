@@ -8,7 +8,10 @@ const Navbar = () => {
 
   return (
     <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-md shadow-md px-6 py-4 flex justify-between items-center">
-      <h1 className="text-2xl font-extrabold text-teal-600">Hotel Booking</h1>
+      <h1 className="text-2xl font-extrabold text-teal-600"><Link
+              to="/dashboard/explore"
+            
+            >Hotel Booking</Link></h1>
       <div className="space-x-6">
         {isLoggedIn ? (
           <>
